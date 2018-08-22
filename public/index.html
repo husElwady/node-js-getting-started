@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple ChatApp</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/v4-shims.css">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <div id="chatApp">
+      <h1 class="head">Welcome to LiveChat</h1>
+    <div id="content" class="do-nicescroll4">
+        <div id="context" class="wrap"></div>
+        <div id="feedback"></div>
+    </div>
+    <!--<button id="cls">clear</button>-->
+    <input class="form-control" type="text" name="per" id="person" placeholder="Member name" required="required" />
+    <div class="flexContainer">
+      <input class="form-control" type="text" name="msg" id="txt" class="input-filed" placeholder="type your message" required="required" >
+      <i class="fas fa-location-arrow" id="btn"></i>
+    </div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

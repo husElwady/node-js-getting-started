@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+
+  <div id="chatApp">
+    <div id="content">
+        <div id="context"></div>
+        <div id="feedback"></div>
+    </div>
+    <!--<button id="cls">clear</button>-->
+    <input type="text" name="per" id="person" placeholder="Member name" required="required" />
+    <input type="text" name="msg" id="txt" placeholder="Message" required="required" ><br />
+    <button id="btn">send</button>
+</div>
+
+<script>
+  var socket = io.connect(process.env.PORT),
+     person = document.getElementById('person'),
+     button = document.getElementById('btn'),
+     output = document.getElementById('context'),
+     message = document.getElementById('txt'),
+     feed = document.getElementById('feedback');
+ 
+
+/*function sendMsg() {
+    var data = message.value;
+    message.value = "";
+    socket.emit('chat',data);  
+}*/
+
+
+button.addEventListener('click', function () {
+    if(message.value === "" || person.value === ""){
+        return false;
+    }
+    socket.emit('chat',{
+        message : message.value,
+        person : person.value
+    });
+    message.value = "";
+    person.disabled = 'disabled';
+});
+
+socket.on('chatt', function (data) {
+    feed.innerHTML = "";
+    output.innerHTML += '<p><strong>' + data.person + ': </strong>' + data.message + '</p>';
+ });
+
+message.addEventListener('keypress', function () {
+    socket.emit('typing', person.value);
+});
+
+socket.on('typing', function (data) {
+    feed.innerHTML = '<p><em>'+ data + ' is typing message...</em></p>';
+});
+
+message.addEventListener('mouseup', function () {
+    feed.innerHTML = "";
+});
+message.addEventListener('mouseleave', function () {
+    feed.innerHTML = "";
+});
+</script>
+</body>
+</html>
